@@ -1,0 +1,60 @@
+#server端口号和访问工程名
+server:
+  port: 8080
+  servlet:
+    context-path: /example
+
+#DB连接池
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/study?autoRec&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      enabled: true #是否启用http上传处理
+      max-request-size: 100MB #最大请求文件的大小
+      max-file-size: 20MB #设置单个文件最大长度
+      file-size-threshold: 20MB #当文件达到多少时进行磁盘写入
+
+  ## 取消模板文件缓存
+  thymeleaf:
+    cache: false
+
+#mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath:mybatis/*.xml
+  type-aliases-package: com.example.model
+  configuration:
+    map-underscore-to-camel-case: true
+
+#log日志
+logging:
+  level:
+    com.example.develop.mapper: debug
+    org.mybatis:  DEBUG
+    org.springframework.scheduling: INFO
+    org.springframework.web: debug
+    org.springframework.security: error
+  file:
+    name: /mnt/example/log/example.log
+
+##自定义配置
+develop:
+  properties:
+    paths-properties:
+      #根路径
+      root_path: /mnt/example
+      #nginx 预览地址
+      remote_upload_path: http://127.0.0.1:8080
+      #文件实际地址
+      file_actual_path: file
+      #图片实际地址
+      img_actual_path: img
+      #文档实际地址
+      doc_actual_path: doc
+      #临时文件地址
+      temp_path: temp
+      #永久文件地址
+      permanent_path: permanent
